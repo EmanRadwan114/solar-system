@@ -1,17 +1,11 @@
-FROM node:18-alpine3.17
+FROM ubuntu:latest    
 
-WORKDIR /usr/app
+WORKDIR /APP/dir                 
 
-COPY package*.json /usr/app/
+COPY script.sh /APP/dir           
 
-RUN npm install
+COPY . .                         
 
-COPY . .
+RUN chmod +x /APP/dir/script.sh    
 
-ENV MONGO_URI=uriPlaceholder
-ENV MONGO_USERNAME=usernamePlaceholder
-ENV MONGO_PASSWORD=passwordPlaceholder
-
-EXPOSE 3000
-
-CMD [ "npm", "start" ]
+CMD ["/APP/dir/script.sh"]
