@@ -21,7 +21,7 @@ jobs:
     runs-on: ${{ matrix.operating_system }}
     steps:
       - name: Checkout
-        uses: actions/checkout/@v4.2.2
+        uses: actions/checkout@v4.2.2
       - name: Setup Node.js environment
         uses: actions/setup-node@v4.4.0
         with:
@@ -47,7 +47,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout/@v4.2.2
+        uses: actions/checkout@v4.2.2
       - name: Setup Node.js environment
         uses: actions/setup-node@v4.4.0
         with:
@@ -74,7 +74,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v4.2.2
 
       - name: docker login
         uses: docker/login-action@v3
@@ -90,6 +90,10 @@ jobs:
           tags: ${{ vars.DOCKERHUB_USERNAME }}/solar-system:${{ github.sha }}
 
       - name: Docker image Test
+        env:
+          MONGO_URI: ${{ env.MONGO_URI }}
+          MONGO_USERNAME: ${{ env.MONGO_USERNAME }}
+          MONGO_PASSWORD: ${{ env.MONGO_PASSWORD }}
         run: |
           docker images
           docker run --name solar-system-app -d \
