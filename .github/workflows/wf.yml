@@ -82,6 +82,9 @@ jobs:
           username: ${{ vars.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_PASSWORD }}
 
+      - name: Test Docker Pull
+        run: docker pull hello-world
+
       - name: Build and push
         uses: docker/build-push-action@v5
         with:
